@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
+import { taskContext } from "../containers/taskContainer";
+import { createTask } from "../actions/taskActions";
 
 const TaskForm = ({ addNewTask }) => {
+  const { dispatch } = useContext(taskContext);
 
   const addTask = (e) => {
     e.preventDefault();
     const { title, text } = e.target;
-    addNewTask(title.value, text.value);
+    dispatch(createTask(title.value, text.value));
+    title.value = "";
+    text.value = "";
   };
 
   return (
-    <form className="col-8 col-lg-8 mx-auto mt-2" onSubmit={addTask}>
+    <form
+      className="rounded shadow p-3 mb-5 col-8 col-lg-8 mx-auto mt-2"
+      onSubmit={addTask}
+    >
       <input
         className="form-control form-lg-control mb-2"
         type="text"
@@ -17,6 +25,8 @@ const TaskForm = ({ addNewTask }) => {
         //ref={title}
         id="title"
         name="title"
+        autoFocus
+        required
       />
       <input
         className="form-control form-lg-control mb-2"
@@ -25,6 +35,7 @@ const TaskForm = ({ addNewTask }) => {
         //ref={text}
         id="text"
         name="text"
+        required
       />
 
       <button type="submit" className="btn btn-success btn-lg-success">

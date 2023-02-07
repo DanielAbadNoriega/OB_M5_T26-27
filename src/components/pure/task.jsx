@@ -1,9 +1,36 @@
 import React, { useContext } from "react";
-import { deleteTask } from "../actions/taskActions";
+import { deleteTask, toggleTask } from "../actions/taskActions";
 import { taskContext } from "../containers/taskContainer";
 
 const Task = ({ task }) => {
   const { dispatch } = useContext(taskContext);
+
+  const switchChecked = (
+    <input
+      className={`form-check-input ${
+        task.completed ? "bg-success" : "bg-danger"
+      }`}
+      type="checkbox"
+      role="switch"
+      id="switchTaskCompleted"
+      style={{ cursor: "pointer" }}
+      onClick={() => dispatch(toggleTask(task.id))}
+      checked
+    />
+  );
+
+  const switchUnChecked = (
+    <input
+      className={`form-check-input ${
+        task.completed ? "bg-success" : "bg-danger"
+      }`}
+      type="checkbox"
+      role="switch"
+      id="switchTaskCompleted"
+      style={{ cursor: "pointer" }}
+      onClick={() => dispatch(toggleTask(task.id))}
+    />
+  );
 
   return (
     <div className="card col-5 col-lg-5 mx-auto mb-2">
@@ -21,15 +48,10 @@ const Task = ({ task }) => {
         {" "}
         DELETE{" "}
       </button>
-      <div class="form-check form-switch">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          role="switch"
-          id="flexSwitchCheckDefault"
-        />
-        <label class="form-check-label" for="flexSwitchCheckDefault">
-          { task.completed ? "COMPLETED" : "UNCOMPLETED"}
+      <div className="form-check form-switch col-7 col-lg-7 mx-auto">
+        {task.completed ? switchChecked : switchUnChecked}
+        <label className="form-check-label" for="switchTaskCompleted">
+          {task.completed ? "COMPLETED" : "UNCOMPLETED"}
         </label>
       </div>
     </div>

@@ -2,13 +2,15 @@ import React, { useContext } from "react";
 import { taskContext } from "../containers/taskContainer";
 import { createTask } from "../actions/taskActions";
 
-const TaskForm = ({ addNewTask }) => {
+const TaskForm = () => {
   const { dispatch } = useContext(taskContext);
 
   const addTask = (e) => {
     e.preventDefault();
     const { title, text } = e.target;
     dispatch(createTask(title.value, text.value));
+/*     dispatch(createTask("First Task", "My first task."));
+    dispatch(createTask("Second Task", "My second task.")); */
     title.value = "";
     text.value = "";
   };

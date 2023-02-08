@@ -15,6 +15,7 @@ const Task = ({ task }) => {
       id="switchTaskCompleted"
       style={{ cursor: "pointer" }}
       onClick={() => dispatch(toggleTask(task.id))}
+      onChange={e => {}}
       checked
     />
   );
@@ -29,6 +30,7 @@ const Task = ({ task }) => {
       id="switchTaskCompleted"
       style={{ cursor: "pointer" }}
       onClick={() => dispatch(toggleTask(task.id))}
+      onChange={e => {}}
     />
   );
 
@@ -50,7 +52,7 @@ const Task = ({ task }) => {
       </button>
       <div className="form-check form-switch col-7 col-lg-7 mx-auto">
         {task.completed ? switchChecked : switchUnChecked}
-        <label className="form-check-label" for="switchTaskCompleted">
+        <label className="form-check-label" htmlFor="switchTaskCompleted">
           {task.completed ? "COMPLETED" : "UNCOMPLETED"}
         </label>
       </div>
